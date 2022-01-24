@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="jp">
 <head>
@@ -35,15 +36,34 @@
    <div class="controller"> 
    <video controls="" autoplay="" name="media" id="player" ><source src="http://160.251.15.165:8000/ices" type="audio/mpeg" ></video>
 
-    
+
   </div>
 
 <div class="playing">
     <img src="gif_sound_Ingeji.gif" width="400px" height="400px">
 </div>
 <img src="gif_sound_Ingeji.gif" width="200px" height="200px" class="playphone">
+<div class="chat">
+    <ul id="messages" style="list-style-type: decimal; font-size: 16px; font-family: Arial; list-style: none;max-height: 15vh; overflow: scroll;"></ul>
+<form action="">
+    <input id="sendmsg" autocomplete="off" /><button>Send</button>
+    </form>
 
+</div>
 <style>
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #797979;
+  }
+
+
 @media screen and (min-width: 481px){
     .title{
     text-align: center;
@@ -52,6 +72,14 @@
     font-family: bello-pro, sans-serif;
 }
 
+.chat  {
+    background-color: white;
+    max-width: 30vh;
+    padding: 1vh;
+    top: 54vw;
+  left: 80vw;
+  position: absolute;
+}
 
 a{
     position: relative;
@@ -74,7 +102,7 @@ font-family: 'Montserrat', sans-serif;
     transition: .3s;
     transform: translateX(-50%);
   }
-  
+
   a:hover::after{
     width: 100%;
   }
@@ -95,7 +123,7 @@ body{
     padding: 0;
     min-height: 110vh;
 }
-  
+
 @keyframes blink{
     0% {opacity:0;}
     100% {opacity:1;}
@@ -150,7 +178,7 @@ a{
     font-family: 'Josefin Slab', serif;
 font-family: 'Montserrat', sans-serif;
   }
-  
+
   a::after {
     position: absolute;
     bottom: 0;
@@ -162,7 +190,7 @@ font-family: 'Montserrat', sans-serif;
     transition: .3s;
     transform: translateX(-50%);
   }
-  
+
   a:hover::after{
     width: 100%;
   }
@@ -184,7 +212,7 @@ body{
     padding: 0;
     min-height: 100vh;
 }
-  
+
 @keyframes blink{
     0% {opacity:0;}
     100% {opacity:1;}
@@ -227,6 +255,15 @@ var media = document.getElementById("player")
 media.volume = 0.1
 
 
+  var socket = io();
+  $('form').submit(function(){
+    socket.emit('chat message', $('#sendmsg').val());
+    $('#sendmsg').val('');
+    return false;
+  });
+  socket.on('chat message', function(msg){
+    $('#messages').append($('<li style="margin-bottom: 5px; ">').text(msg));
+  });
 </script>
 </body>
-</html>
+</html> 
