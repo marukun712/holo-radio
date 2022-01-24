@@ -42,13 +42,7 @@
     <img src="gif_sound_Ingeji.gif" width="400px" height="400px">
 </div>
 <img src="gif_sound_Ingeji.gif" width="200px" height="200px" class="playphone">
-<div class="chat">
-    <ul id="messages" style="list-style-type: decimal; font-size: 16px; font-family: Arial; list-style: none;max-height: 20vh;"></ul>
-<form action="">
-    <input id="sendmsg" autocomplete="off" /><button>Send</button>
-    </form>
-    
-</div>
+
 <style>
 @media screen and (min-width: 481px){
     .title{
@@ -58,14 +52,6 @@
     font-family: bello-pro, sans-serif;
 }
 
-.chat  {
-    background-color: white;
-    max-width: 30vh;
-    padding: 1vh;
-    top: 54vw;
-  left: 80vw;
-  position: absolute;
-}
 
 a{
     position: relative;
@@ -241,15 +227,6 @@ var media = document.getElementById("player")
 media.volume = 0.1
 
 
-  var socket = io();
-  $('form').submit(function(){
-    socket.emit('chat message', $('#sendmsg').val());
-    $('#sendmsg').val('');
-    return false;
-  });
-  socket.on('chat message', function(msg){
-    $('#messages').append($('<li style="margin-bottom: 5px;">').text(msg));
-  });
 </script>
 </body>
 </html>
