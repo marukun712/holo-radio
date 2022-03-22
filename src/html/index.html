@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&family=Montserrat:ital,wght@0,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/xrv0mfx.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="icon" type="image/x-icon" href="https://yt3.ggpht.com/a/AGF-l78roMKQjt4568VGVjmLkiOJ-25H9BxD_GH6QA=s256">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&family=Montserrat:ital,wght@0,700;1,800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&family=Montserrat:ital,wght@0,700;1,800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
+    <title>holo-radio</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <a href="https://marukunserver.ml/marukun-music/src/html/index.html"><img src="/holo-radio/src/img/icon_000300_256.png" width="30" height="30">back home</a><br>
+    </div>
+    <div class="title">
+        <h1 style="font-size: 8vw;">holo-radio</h1>
+    </div>
+
+    <div class="icon">
+        <img src="https://icon-rainbow.com/i/icon_02937/icon_029370_256.png">
+    </div>
+
+
+
+    <div id="playing"></div>
+
+    <div class="chat">
+        <ul id="messages" style="list-style-type: decimal; font-size: 16px; font-family: Arial; list-style: none;max-height: 15vh; overflow: scroll;"></ul>
+        <form action="">
+            <input id="sendmsg" autocomplete="off" placeholder="チャットを入力、、、" /><button style="background-color: white;">送信</button>
+        </form>
+
+    </div>
+
+    <style>
+         ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        
+         ::-webkit-scrollbar-track {
+            background: #ffffff;
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            background: #797979;
+        }
+        
+        @media screen and (min-width: 481px) {
+            .title {
+                text-align: center;
+                padding: 5vw;
+                font-size: 350%;
+                font-family: bello-pro, sans-serif;
+            }
+            canvas {
+                position: absolute;
+                top: 100vh;
+                width: 100vh;
+            }
+            .chat {
+                background-color: white;
+                position: absolute;
+                top: 100vh;
+                right: 1vw;
+                border: solid 5px #6091d3;
+                border-radius: 10px;
+            }
+            .sidebar {
+                position: absolute;
+                top: 1vh;
+                left: 1vh;
+                font-family: 'Montserrat', sans-serif;
+            }
+            html {
+                max-height: 100vh;
+            }
+            body {
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-image: url(/holo-radio/src/img/holo.jpg);
+                margin: 0;
+                padding: 0;
+            }
+            @keyframes blink {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+            .icon {
+                position: absolute;
+                top: 1%;
+                right: 1%;
+                animation: blink 1s ease-in-out infinite alternate;
+                width: 150px;
+            }
+            .playing {
+                position: absolute;
+                left: 2%;
+                top: 45vw;
+            }
+            .controller {
+                text-align: center;
+                top: 45vw;
+                left: 42vw;
+                position: absolute;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            html {
+                max-height: 100vh;
+            }
+            body {
+                background-size: 100vh;
+                background-repeat: no-repeat;
+                background-image: url(/holo-radio/src/img/phone.jpg);
+                margin: 0;
+                padding: 0;
+            }
+            .title {
+                text-align: center;
+                padding: 20vw;
+                font-family: bello-pro, sans-serif;
+            }
+            @keyframes blink {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+            .controller {
+                margin: 8vw;
+            }
+            .icon {
+                position: absolute;
+                top: 1%;
+                right: 1%;
+                animation: blink 1s ease-in-out infinite alternate;
+                width: 70px;
+            }
+            .playing {
+                position: absolute;
+                left: 2%;
+                top: 45vw;
+            }
+            .chat {
+                background-color: white;
+                position: absolute;
+                top: 80vh;
+                right: 0vh;
+                border: solid 5px #6091d3;
+                border-radius: 10px;
+            }
+            .sidebar {
+                font-family: bello-pro, sans-serif;
+            }
+            canvas {
+                position: absolute;
+                top: 100vh;
+                left: 2.5vh;
+                width: 50vh;
+            }
+        }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="/src/js/audio.js"></script>
+    <script>
+        var media = document.getElementById("player")
+
+        media.volume = 0.1
+
+
+        var socket = io();
+        $('form').submit(function() {
+            socket.emit('chat message', $('#sendmsg').val());
+            $('#sendmsg').val('');
+            return false;
+        });
+        socket.on('chat message', function(msg) {
+            $('#messages').append($('<li style="margin-bottom: 5px; background-color: white;">').text(msg));
+        });
+    </script>
+</body>
+
+</html>
