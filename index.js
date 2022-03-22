@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 2000;
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -16,6 +16,6 @@ io.on('connection', function(socket) {
     });
 });
 
-http.listen(2000, function() {
-    console.log('2000で起動したよ');
+http.listen(port, function() {
+    console.log(`marukunserver.ml:${port}`);
 });
