@@ -1,12 +1,11 @@
     let isStarted = false;
-
     document.documentElement.addEventListener("mousedown", function() {
         if (!isStarted) {
             isStarted = true;
 
             mouse_IsDown = true;
             console.log("mouse down");
-
+            document.getElementById('info').remove();
             const audioCtx = new AudioContext();
 
             //Create audio source
